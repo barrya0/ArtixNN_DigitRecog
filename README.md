@@ -14,4 +14,4 @@ Current Progress:
 
 The design is pretty much done. I've done simulations and am getting good accuracy. I've even run some comparisons comparing accuracy with different data widths, layer designs, ReLU vs Sigmoid, and more. Overall, over 100 test samples, I get 98% accuracy using sigmoid with a data width of 16. This is using nearly all available DSP slices on the board though. And surprisingly 99% accuracy with a data width of 8 and very small DSP usage but of course, more LUTs and FFs. My big obstacle right now is hardware validation. I'm trying my best to really understand how to get everything working.
 
-Then...when all this is done, I've been meaning to try a binarized neural network design on my FPGA as well but yeah that may not be for a little while.
+Then...when all this is done, I've been meaning to use this project as a jumping off point to try a binarized neural network design on my FPGA as well but yeah that may not be for a little while.
