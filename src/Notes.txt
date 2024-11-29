@@ -1,0 +1,76 @@
+Signed Multiplication as it relates to the bit width considerations in the design
+
+Consider:
+
+number1 has (m int) (n frac) so (m+n) bits
+number2 has (j int) (k frac) so (j+k) bits
+
+signed mul of number1*number2 result will be the sum of total number of bits (m+n+k+j)
+
+however:
+
+there are 2 sign bits so we must subtract from the integer width
+(m-1) + (k-1) -> integer part
+n+j -> fractional part
+
+sum (32 bits) would require depth of LUT for the sigmoid to be (2^32)*16bits-datawidth to each neuron or ~ 4G*2. Obviously this is not practical for each neuron. 
+This is why we only take the most significant bits of the sum respective to parameter sigmoidSize to feed to our sigmoid module.
+
+1 bit sign
+sizeof(int part of input) + sizeof(int part of weight) + 1 -> integer part
+sizeof(frac part of input) + sizeof(frac part of weight) -> fractional part
+
+----------------------------------------------------------------------
+Post-Implementation Single Neuron Resource Utilization ReLU vs Sigmoid.1024_Entries vs Sigmoid.32_Entries
+
+ReLU
+
+Resource/Utilization/Available/Utilization %
+LUT	75	20800	0.36057693
+FF	66	41600	0.15865386
+BRAM	0.5	50	1.0
+DSP	2	90	2.2222223
+IO	36	106	33.962265
+BUFG	1	32	3.125
+
+Constrain of 250 MHz ~ period of 4ns
+Worst Negative Slack (WNS) = -0.786ns
+1/(4ns+0.786ns) ~ 0.209
+Maximum Frequency(Fmax) as of now: 209MHz
+
+Accuracy: 90.0%
+----------------------------------------------------------------------
+
+Sigmoid.1024_Entries
+
+LUT	78	20800	0.375
+FF	65	41600	0.15625
+BRAM	1	50	2.0
+DSP	2	90	2.2222223
+IO	36	106	33.962265
+BUFG	1	32	3.125
+
+Constrain of 250 MHz ~ period of 4ns
+Worst Negative Slack (WNS) = -0.779ns
+1/(4ns+0.786ns) ~ 0.209
+Maximum Frequency(Fmax) as of now: 209MHz
+
+Accuracy: 98.0%
+-----------------------------------------------------------------------
+
+Sigmoid.32_Entries
+
+LUT	76	20800	0.3653846
+FF	55	41600	0.13221154
+BRAM	0.5	50	1.0
+DSP	2	90	2.2222223
+IO	36	106	33.962265
+BUFG	1	32	3.125
+
+Constrain of 250 MHz ~ period of 4ns
+Worst Negative Slack (WNS) = -0.783ns
+1/(4ns+0.786ns) ~ 0.209
+Maximum Frequency(Fmax) as of now: 209MHz
+
+Accuracy: 96.0%
+-----------------------------------------------------------------------

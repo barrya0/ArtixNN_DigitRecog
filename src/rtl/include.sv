@@ -1,0 +1,36 @@
+//Configured for 3 layer architecture 30-20-10
+`define pretrained 1
+//`define numLayers 5
+`define numLayers 4
+`define dataWidth 16
+//`define dataWidth 8
+//`define numNeuronLayer1 30
+`define numNeuronLayer1 20
+//`define numNeuronLayer1 25
+`define numWeightLayer1 784
+`define Layer1ActType "sigmoid"
+//`define numNeuronLayer2 20
+`define numNeuronLayer2 15
+//`define numNeuronLayer2 10
+//`define numNeuronLayer2 30
+//`define numWeightLayer2 30
+`define numWeightLayer2 20
+`define Layer2ActType "sigmoid"
+`define numNeuronLayer3 10
+//`define numWeightLayer3 20
+`define numWeightLayer3 15
+//`define numWeightLayer3 10
+//`define numWeightLayer3 30
+`define Layer3ActType "sigmoid"
+
+`define numNeuronLayer4 10
+`define numWeightLayer4 10
+`define Layer4ActType "hardmax"
+//`define Layer4ActType "sigmoid"
+//NO LAYER 5
+//`define numNeuronLayer5 10
+//`define numWeightLayer5 10
+//`define Layer5ActType "hardmax"
+`define sigmoidSize 10
+//`define sigmoidSize 5
+`define weightIntWidth 4
